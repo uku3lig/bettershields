@@ -14,15 +14,11 @@
   "icon": "assets/bettershieldsounds/icon.png",
   "environment": "client",
   "entrypoints": {
-    "main": [
-      "net.uku3lig.bettershieldsounds.BetterShieldSounds"
-    ]
   },
   "mixins": [
     "bettershieldsounds.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.15",
-    "minecraft": "1.19.3"
+    "fabricloader": ">=0.13"
   }
 }
