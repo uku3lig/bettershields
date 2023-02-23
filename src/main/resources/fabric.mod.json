@@ -14,6 +14,9 @@
   "icon": "assets/bettershieldsounds/icon.png",
   "environment": "client",
   "entrypoints": {
+    "ukulib": [
+      "net.uku3lig.bettershieldsounds.UkulibHook"
+    ]
   },
   "mixins": [
     "bettershieldsounds.mixins.json"

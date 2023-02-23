@@ -10,6 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
+import net.uku3lig.bettershieldsounds.BetterShieldSounds;
+import net.uku3lig.bettershieldsounds.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,10 +22,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinClientPlayerInteractionManager {
     @Inject(method = "attackEntity", at = @At("HEAD"))
     public void playShieldSound(PlayerEntity player, Entity target, CallbackInfo ci) {
-        log.info("hi :3");
-
         ClientWorld world = MinecraftClient.getInstance().world;
-        if (target instanceof LivingEntity entity && doesShieldBlock(player, entity) && world != null) {
+        ShieldConfig config = BetterShieldSounds.getManager().getConfig();
+
+        if (config.isEnabled() && target instanceof LivingEntity entity && doesShieldBlock(player, entity) && world != null) {
             if (player.getMainHandStack().getItem() instanceof AxeItem) {
                 player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + world.random.nextFloat() * 0.4F);
             } else {
