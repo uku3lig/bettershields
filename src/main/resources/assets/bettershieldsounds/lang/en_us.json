@@ -1,3 +1,4 @@
 {
-  "bettershieldsounds.config.enabled": "Enable Shield Sounds"
+  "bettershieldsounds.config.enabled": "Enable Shield Sounds",
+  "bettershieldsounds.toggle": "Toggle Shield Sounds"
 }

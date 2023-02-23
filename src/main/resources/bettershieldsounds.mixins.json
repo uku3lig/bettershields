@@ -4,6 +4,7 @@
   "package": "net.uku3lig.bettershieldsounds.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MixinMinecraftClient"
   ],
   "client": [
     "MixinClientPlayerInteractionManager"
