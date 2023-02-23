@@ -1,7 +1,8 @@
 package net.uku3lig.bettershieldsounds.config;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.option.SimpleOption;
+import net.minecraft.client.option.CyclingOption;
+import net.minecraft.client.option.Option;
 import net.minecraft.text.Text;
 import net.uku3lig.bettershieldsounds.BetterShieldSounds;
 import net.uku3lig.ukulib.config.screen.AbstractConfigScreen;
@@ -12,9 +13,9 @@ public class ShieldConfigScreen extends AbstractConfigScreen<ShieldConfig> {
     }
 
     @Override
-    protected SimpleOption<?>[] getOptions(ShieldConfig config) {
-        return new SimpleOption[]{
-                SimpleOption.ofBoolean("bettershieldsounds.config.enabled", config.isEnabled(), config::setEnabled)
+    protected Option[] getOptions(ShieldConfig config) {
+        return new Option[]{
+                CyclingOption.create("bettershieldsounds.config.enabled", opt -> config.isEnabled(), (opt, options, value) -> config.setEnabled(value))
         };
     }
 }
