@@ -25,21 +25,12 @@ public class MixinClientPlayerInteractionManager {
         ClientWorld world = MinecraftClient.getInstance().world;
         ShieldConfig config = BetterShieldSounds.getManager().getConfig();
 
-        if (config.isEnabled() && target instanceof LivingEntity entity && doesShieldBlock(player, entity) && world != null) {
+        if (config.isEnabled() && target instanceof LivingEntity entity && BetterShieldSounds.doesShieldBlock(player, entity) && world != null) {
             if (player.getMainHandStack().getItem() instanceof AxeItem) {
-                player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + world.random.nextFloat() * 0.4F);
+                world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BREAK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
             } else {
-                player.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+                world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BLOCK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
             }
         }
-    }
-
-    private static boolean doesShieldBlock(PlayerEntity attacker, LivingEntity target) {
-        if (!target.isBlocking()) return false;
-
-        Vec3d rotation = target.getRotationVec(1);
-        Vec3d relativePosition = attacker.getPos().relativize(target.getPos()).normalize();
-        Vec3d flat = new Vec3d(relativePosition.x, 0.0, relativePosition.z);
-        return flat.dotProduct(rotation) < 0.0;
     }
 }

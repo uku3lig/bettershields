@@ -5,6 +5,9 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.util.math.Vec3d;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import net.uku3lig.ukulib.config.ConfigManager;
 import org.lwjgl.glfw.GLFW;
@@ -19,5 +22,14 @@ public class BetterShieldSounds implements ModInitializer {
     @Override
     public void onInitialize() {
         KeyBindingHelper.registerKeyBinding(toggle);
+    }
+
+    public static boolean doesShieldBlock(Entity attacker, LivingEntity target) {
+        if (!target.isBlocking()) return false;
+
+        Vec3d rotation = target.getRotationVec(1);
+        Vec3d relativePosition = attacker.getPos().relativize(target.getPos()).normalize();
+        Vec3d flat = new Vec3d(relativePosition.x, 0.0, relativePosition.z);
+        return flat.dotProduct(rotation) < 0.0;
     }
 }
