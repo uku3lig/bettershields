@@ -16,7 +16,7 @@ public class BetterShields implements ModInitializer {
     private static final ConfigManager<ShieldConfig> manager = ConfigManager.create(ShieldConfig.class, "bettershields");
 
     @Getter
-    private static final KeyBinding toggle = new KeyBinding("bettershields.toggle", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "BetterShieldSounds");
+    private static final KeyBinding toggle = new KeyBinding("bettershields.toggleSounds", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "BetterShieldSounds");
 
     @Override
     public void onInitialize() {

@@ -10,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.UseAction;
+import net.uku3lig.bettershields.BetterShields;
+import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -30,17 +32,20 @@ public class MixinBuiltinModelItemRenderer {
     @ModifyArgs(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;IIFFFF)V"))
     public void changeShieldColor(Args args) {
         if (!this.mode.isFirstPerson()) return;
+        ShieldConfig config = BetterShields.getManager().getConfig();
+        if (!config.isColoredShields()) return;
 
-        // todo put these into config
-        if (isBroken()) {
-            args.set(4, 1.0F);
-            args.set(5, 0.0F);
-            args.set(6, 0.0F);
+        if (isDisabled()) {
+            setColor(args, config.getDisabledColor());
         } else if (isRising()) {
-            args.set(4, 1.0F);
-            args.set(5, 0.8F);
-            args.set(6, 0.0F);
+            setColor(args, config.getRisingColor());
         }
+    }
+
+    private void setColor(Args args, int color) {
+        args.set(4, (color >> 16 & 255) / 255.0F);
+        args.set(5, (color >> 8 & 255) / 255.0F);
+        args.set(6, (color & 255) / 255.0F);
     }
 
     private boolean isRising() {
@@ -53,7 +58,7 @@ public class MixinBuiltinModelItemRenderer {
                 && item.getMaxUseTime(player.getActiveItem()) - player.getItemUseTimeLeft() < 5;
     }
 
-    private boolean isBroken() {
+    private boolean isDisabled() {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
 
         return player != null && player.getItemCooldownManager().isCoolingDown(Items.SHIELD);

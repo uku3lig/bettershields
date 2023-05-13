@@ -23,10 +23,10 @@ public class MixinMinecraftClient {
     public void processKeybindings(CallbackInfo ci) {
         while (BetterShields.getToggle().wasPressed()) {
             ShieldConfig config = BetterShields.getManager().getConfig();
-            config.setEnabled(!config.isEnabled());
+            config.setSoundsEnabled(!config.isSoundsEnabled());
             BetterShields.getManager().saveConfig();
 
-            player.sendMessage(Text.literal("Shield Sounds ").append(config.isEnabled() ? ON : OFF), true);
+            player.sendMessage(Text.literal("Shield Sounds ").append(config.isSoundsEnabled() ? ON : OFF), true);
         }
     }
 }

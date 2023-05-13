@@ -24,7 +24,7 @@ public class MixinClientPlayerInteractionManager {
         ClientWorld world = MinecraftClient.getInstance().world;
         ShieldConfig config = BetterShields.getManager().getConfig();
 
-        if (config.isEnabled() && target instanceof LivingEntity entity && BetterShields.doesShieldBlock(player.getPos(), entity) && world != null) {
+        if (config.isSoundsEnabled() && target instanceof LivingEntity entity && BetterShields.doesShieldBlock(player.getPos(), entity) && world != null) {
             if (player.getMainHandStack().getItem() instanceof AxeItem) {
                 world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BREAK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
             } else {
