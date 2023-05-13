@@ -31,7 +31,9 @@ public class MixinExplosion {
     @Shadow @Final private World world;
 
     @Inject(method = "affectWorld", at = @At("HEAD"))
-    public void hi(boolean particles, CallbackInfo ci) {
+    public void playShieldSoundsFromExplosion(boolean particles, CallbackInfo ci) {
+        if (!BetterShields.getManager().getConfig().isEnabled()) return;
+
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (!this.world.isClient || player == null) return;
 
