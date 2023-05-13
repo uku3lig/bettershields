@@ -1,12 +1,12 @@
-package net.uku3lig.bettershieldsounds.mixin;
+package net.uku3lig.bettershields.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.uku3lig.bettershieldsounds.BetterShieldSounds;
-import net.uku3lig.bettershieldsounds.config.ShieldConfig;
+import net.uku3lig.bettershields.BetterShields;
+import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,12 +22,12 @@ public class MixinMinecraftClient {
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void processKeybindings(CallbackInfo ci) {
-        while (BetterShieldSounds.getToggle().wasPressed()) {
-            ShieldConfig config = BetterShieldSounds.getManager().getConfig();
-            config.setEnabled(!config.isEnabled());
-            BetterShieldSounds.getManager().saveConfig();
+        while (BetterShields.getToggle().wasPressed()) {
+            ShieldConfig config = BetterShields.getManager().getConfig();
+            config.setSoundsEnabled(!config.isSoundsEnabled());
+            BetterShields.getManager().saveConfig();
 
-            player.sendMessage(new LiteralText("Shield Sounds ").append(config.isEnabled() ? ON : OFF), true);
+            player.sendMessage(new LiteralText("Shield Sounds ").append(config.isSoundsEnabled() ? ON : OFF), true);
         }
     }
 }

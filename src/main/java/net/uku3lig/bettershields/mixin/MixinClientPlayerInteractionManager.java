@@ -1,4 +1,4 @@
-package net.uku3lig.bettershieldsounds.mixin;
+package net.uku3lig.bettershields.mixin;
 
 import lombok.extern.slf4j.Slf4j;
 import net.minecraft.client.MinecraftClient;
@@ -9,9 +9,8 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.Vec3d;
-import net.uku3lig.bettershieldsounds.BetterShieldSounds;
-import net.uku3lig.bettershieldsounds.config.ShieldConfig;
+import net.uku3lig.bettershields.BetterShields;
+import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,23 +22,14 @@ public class MixinClientPlayerInteractionManager {
     @Inject(method = "attackEntity", at = @At("HEAD"))
     public void playShieldSound(PlayerEntity player, Entity target, CallbackInfo ci) {
         ClientWorld world = MinecraftClient.getInstance().world;
-        ShieldConfig config = BetterShieldSounds.getManager().getConfig();
+        ShieldConfig config = BetterShields.getManager().getConfig();
 
-        if (config.isEnabled() && target instanceof LivingEntity entity && doesShieldBlock(player, entity) && world != null) {
+        if (config.isSoundsEnabled() && target instanceof LivingEntity entity && BetterShields.doesShieldBlock(player.getPos(), entity) && world != null) {
             if (player.getMainHandStack().getItem() instanceof AxeItem) {
-                player.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.8F, 0.8F + world.random.nextFloat() * 0.4F);
+                world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BREAK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
             } else {
-                player.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+                world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BLOCK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
             }
         }
-    }
-
-    private static boolean doesShieldBlock(PlayerEntity attacker, LivingEntity target) {
-        if (!target.isBlocking()) return false;
-
-        Vec3d rotation = target.getRotationVec(1);
-        Vec3d relativePosition = attacker.getPos().relativize(target.getPos()).normalize();
-        Vec3d flat = new Vec3d(relativePosition.x, 0.0, relativePosition.z);
-        return flat.dotProduct(rotation) < 0.0;
     }
 }

@@ -1,7 +1,7 @@
-package net.uku3lig.bettershieldsounds;
+package net.uku3lig.bettershields;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.uku3lig.bettershieldsounds.config.ShieldConfigScreen;
+import net.uku3lig.bettershields.config.ShieldConfigScreen;
 import net.uku3lig.ukulib.api.UkulibAPI;
 import net.uku3lig.ukulib.config.screen.AbstractConfigScreen;
 
