@@ -1,8 +1,10 @@
 package net.uku3lig.bettershields.config;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.option.SimpleOption;
+import net.minecraft.client.option.CyclingOption;
+import net.minecraft.client.option.Option;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.ukulib.config.screen.AbstractConfigScreen;
 import net.uku3lig.ukulib.config.screen.ColorSelectScreen;
@@ -14,14 +16,14 @@ public class ShieldConfigScreen extends AbstractConfigScreen<ShieldConfig> {
     }
 
     @Override
-    protected SimpleOption<?>[] getOptions(ShieldConfig config) {
-        return new SimpleOption[]{
-                SimpleOption.ofBoolean("bettershields.config.soundsEnabled", config.isSoundsEnabled(), config::setSoundsEnabled),
-                SimpleOption.ofBoolean("bettershields.config.coloredShields", config.isColoredShields(), config::setColoredShields),
+    protected Option[] getOptions(ShieldConfig config) {
+        return new Option[]{
+                CyclingOption.create("bettershields.config.soundsEnabled", opt -> config.isSoundsEnabled(), (opt, option, value) -> config.setSoundsEnabled(value)),
+                CyclingOption.create("bettershields.config.coloredShields", opt -> config.isColoredShields(), (opt, option, value) -> config.setColoredShields(value)),
                 Ukutils.createOpenButton("bettershields.config.disabledColor", textColor(config.getDisabledColor()),
-                        parent -> new ColorSelectScreen(Text.translatable("bettershields.config.disabledColor"), parent, config::setDisabledColor, config.getDisabledColor(), manager)),
+                        parent -> new ColorSelectScreen(new TranslatableText("bettershields.config.disabledColor"), parent, config::setDisabledColor, config.getDisabledColor(), manager)),
                 Ukutils.createOpenButton("bettershields.config.risingColor", textColor(config.getRisingColor()),
-                        parent -> new ColorSelectScreen(Text.translatable("bettershields.config.risingColor"), parent, config::setRisingColor, config.getRisingColor(), manager)),
+                        parent -> new ColorSelectScreen(new TranslatableText("bettershields.config.risingColor"), parent, config::setRisingColor, config.getRisingColor(), manager)),
         };
     }
 

@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
+import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,10 +22,10 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 // part of this code was kindly provided by Marlow's friend, massive thanks to them!
 @Mixin(BuiltinModelItemRenderer.class)
 public class MixinBuiltinModelItemRenderer {
-    private ModelTransformationMode mode;
+    private ModelTransformation.Mode mode;
 
     @Inject(method = "render", at = @At("HEAD"))
-    public void getMode(ItemStack stack, ModelTransformationMode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, CallbackInfo ci) {
+    public void getMode(ItemStack stack, ModelTransformation.Mode mode, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, CallbackInfo ci) {
         this.mode = mode;
     }
 
