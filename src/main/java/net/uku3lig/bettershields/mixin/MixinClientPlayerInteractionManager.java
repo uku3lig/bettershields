@@ -9,8 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.Vec3d;
-import net.uku3lig.bettershields.BetterShieldSounds;
+import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,9 +22,9 @@ public class MixinClientPlayerInteractionManager {
     @Inject(method = "attackEntity", at = @At("HEAD"))
     public void playShieldSound(PlayerEntity player, Entity target, CallbackInfo ci) {
         ClientWorld world = MinecraftClient.getInstance().world;
-        ShieldConfig config = BetterShieldSounds.getManager().getConfig();
+        ShieldConfig config = BetterShields.getManager().getConfig();
 
-        if (config.isEnabled() && target instanceof LivingEntity entity && BetterShieldSounds.doesShieldBlock(player, entity) && world != null) {
+        if (config.isEnabled() && target instanceof LivingEntity entity && BetterShields.doesShieldBlock(player.getPos(), entity) && world != null) {
             if (player.getMainHandStack().getItem() instanceof AxeItem) {
                 world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BREAK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
             } else {

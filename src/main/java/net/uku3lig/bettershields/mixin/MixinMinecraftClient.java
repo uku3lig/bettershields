@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.uku3lig.bettershields.BetterShieldSounds;
+import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,10 +21,10 @@ public class MixinMinecraftClient {
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void processKeybindings(CallbackInfo ci) {
-        while (BetterShieldSounds.getToggle().wasPressed()) {
-            ShieldConfig config = BetterShieldSounds.getManager().getConfig();
+        while (BetterShields.getToggle().wasPressed()) {
+            ShieldConfig config = BetterShields.getManager().getConfig();
             config.setEnabled(!config.isEnabled());
-            BetterShieldSounds.getManager().saveConfig();
+            BetterShields.getManager().saveConfig();
 
             player.sendMessage(Text.literal("Shield Sounds ").append(config.isEnabled() ? ON : OFF), true);
         }

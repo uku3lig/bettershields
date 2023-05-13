@@ -4,11 +4,11 @@
   "package": "net.uku3lig.bettershields.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MixinExplosion",
     "MixinMinecraftClient"
   ],
   "client": [
-    "MixinClientPlayerInteractionManager",
-    "MixinClientPlayNetworkHandler"
+    "MixinClientPlayerInteractionManager"
   ],
   "injectors": {
     "defaultRequire": 1
