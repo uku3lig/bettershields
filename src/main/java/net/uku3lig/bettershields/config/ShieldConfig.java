@@ -1,4 +1,4 @@
-package net.uku3lig.bettershieldsounds.config;
+package net.uku3lig.bettershields.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

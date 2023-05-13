@@ -1,11 +1,11 @@
-package net.uku3lig.bettershieldsounds.mixin;
+package net.uku3lig.bettershields.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.uku3lig.bettershieldsounds.BetterShieldSounds;
-import net.uku3lig.bettershieldsounds.config.ShieldConfig;
+import net.uku3lig.bettershields.BetterShieldSounds;
+import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

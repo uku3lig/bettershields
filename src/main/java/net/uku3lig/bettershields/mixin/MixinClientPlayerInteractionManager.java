@@ -1,4 +1,4 @@
-package net.uku3lig.bettershieldsounds.mixin;
+package net.uku3lig.bettershields.mixin;
 
 import lombok.extern.slf4j.Slf4j;
 import net.minecraft.client.MinecraftClient;
@@ -10,8 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Vec3d;
-import net.uku3lig.bettershieldsounds.BetterShieldSounds;
-import net.uku3lig.bettershieldsounds.config.ShieldConfig;
+import net.uku3lig.bettershields.BetterShieldSounds;
+import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
