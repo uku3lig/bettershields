@@ -1,31 +1,24 @@
 package net.uku3lig.bettershields.config;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.option.SimpleOption;
-import net.minecraft.text.Text;
 import net.uku3lig.bettershields.BetterShields;
+import net.uku3lig.ukulib.config.option.ColorOption;
+import net.uku3lig.ukulib.config.option.CyclingOption;
+import net.uku3lig.ukulib.config.option.WidgetCreator;
 import net.uku3lig.ukulib.config.screen.AbstractConfigScreen;
-import net.uku3lig.ukulib.config.screen.ColorSelectScreen;
-import net.uku3lig.ukulib.utils.Ukutils;
 
 public class ShieldConfigScreen extends AbstractConfigScreen<ShieldConfig> {
     public ShieldConfigScreen(Screen parent) {
-        super(parent, Text.of("BetterShields"), BetterShields.getManager());
+        super("BetterShields Config", parent, BetterShields.getManager());
     }
 
     @Override
-    protected SimpleOption<?>[] getOptions(ShieldConfig config) {
-        return new SimpleOption[]{
-                SimpleOption.ofBoolean("bettershields.config.soundsEnabled", config.isSoundsEnabled(), config::setSoundsEnabled),
-                SimpleOption.ofBoolean("bettershields.config.coloredShields", config.isColoredShields(), config::setColoredShields),
-                Ukutils.createOpenButton("bettershields.config.disabledColor", textColor(config.getDisabledColor()),
-                        parent -> new ColorSelectScreen(Text.translatable("bettershields.config.disabledColor"), parent, config::setDisabledColor, config.getDisabledColor(), manager)),
-                Ukutils.createOpenButton("bettershields.config.risingColor", textColor(config.getRisingColor()),
-                        parent -> new ColorSelectScreen(Text.translatable("bettershields.config.risingColor"), parent, config::setRisingColor, config.getRisingColor(), manager)),
+    protected WidgetCreator[] getWidgets(ShieldConfig config) {
+        return new WidgetCreator[] {
+                CyclingOption.ofBoolean("bettershields.config.soundsEnabled", config.isSoundsEnabled(), config::setSoundsEnabled),
+                CyclingOption.ofBoolean("bettershields.config.coloredShields", config.isColoredShields(), config::setColoredShields),
+                new ColorOption("bettershields.config.disabledColor", config.getDisabledColor(), config::setDisabledColor),
+                new ColorOption("bettershields.config.risingColor", config.getRisingColor(), config::setRisingColor),
         };
-    }
-
-    private String textColor(int color) {
-        return String.format("#%06X", (0xFFFFFF & color));
     }
 }

@@ -13,6 +13,7 @@ import net.minecraft.util.UseAction;
 import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
@@ -22,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 // part of this code was kindly provided by Marlow's friend, massive thanks to them!
 @Mixin(BuiltinModelItemRenderer.class)
 public class MixinBuiltinModelItemRenderer {
+    @Unique
     private ModelTransformationMode mode;
 
     @Inject(method = "render", at = @At("HEAD"))
@@ -42,12 +44,14 @@ public class MixinBuiltinModelItemRenderer {
         }
     }
 
+    @Unique
     private void setColor(Args args, int color) {
         args.set(4, (color >> 16 & 255) / 255.0F);
         args.set(5, (color >> 8 & 255) / 255.0F);
         args.set(6, (color & 255) / 255.0F);
     }
 
+    @Unique
     private boolean isRising() {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if (player == null || !player.isUsingItem() || player.getActiveItem().isEmpty()) return false;
@@ -58,6 +62,7 @@ public class MixinBuiltinModelItemRenderer {
                 && item.getMaxUseTime(player.getActiveItem()) - player.getItemUseTimeLeft() < 5;
     }
 
+    @Unique
     private boolean isDisabled() {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
 

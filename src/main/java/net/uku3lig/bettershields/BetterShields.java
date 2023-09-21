@@ -13,7 +13,7 @@ import org.lwjgl.glfw.GLFW;
 
 public class BetterShields implements ModInitializer {
     @Getter
-    private static final ConfigManager<ShieldConfig> manager = ConfigManager.create(ShieldConfig.class, "bettershields");
+    private static final ConfigManager<ShieldConfig> manager = ConfigManager.createDefault(ShieldConfig.class, "bettershields");
 
     @Getter
     private static final KeyBinding toggle = new KeyBinding("bettershields.toggleSounds", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "BetterShieldSounds");

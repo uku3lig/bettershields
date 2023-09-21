@@ -8,13 +8,16 @@ import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
 public class MixinMinecraftClient {
+    @Unique
     private static final Text ON = Text.literal("ON").formatted(Formatting.BOLD, Formatting.GREEN);
+    @Unique
     private static final Text OFF = Text.literal("OFF").formatted(Formatting.BOLD, Formatting.RED);
 
     @Shadow public ClientPlayerEntity player;
