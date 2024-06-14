@@ -1,7 +1,11 @@
 package net.uku3lig.bettershields.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformationMode;
@@ -16,9 +20,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 // part of this code was kindly provided by Marlow's friend, massive thanks to them!
 @Mixin(BuiltinModelItemRenderer.class)
@@ -31,24 +33,20 @@ public class MixinBuiltinModelItemRenderer {
         this.mode = mode;
     }
 
-    @ModifyArgs(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;IIFFFF)V"))
-    public void changeShieldColor(Args args) {
-        if (!this.mode.isFirstPerson()) return;
+    @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;II)V"))
+    public void changeShieldColor(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, Operation<Void> original) {
         ShieldConfig config = BetterShields.getManager().getConfig();
-        if (!config.isColoredShields()) return;
-
-        if (isDisabled()) {
-            setColor(args, config.getDisabledColor());
-        } else if (isRising()) {
-            setColor(args, config.getRisingColor());
+        if (this.mode.isFirstPerson() && config.isColoredShields()) {
+            if (isDisabled()) {
+                instance.render(matrices, vertices, light, overlay, config.getDisabledColor());
+            } else if (isRising()) {
+                instance.render(matrices, vertices, light, overlay, config.getRisingColor());
+            } else {
+                original.call(instance, matrices, vertices, light, overlay);
+            }
+        } else {
+            original.call(instance, matrices, vertices, light, overlay);
         }
-    }
-
-    @Unique
-    private void setColor(Args args, int color) {
-        args.set(4, (color >> 16 & 255) / 255.0F);
-        args.set(5, (color >> 8 & 255) / 255.0F);
-        args.set(6, (color & 255) / 255.0F);
     }
 
     @Unique
@@ -59,7 +57,7 @@ public class MixinBuiltinModelItemRenderer {
         Item item = player.getActiveItem().getItem();
 
         return item.getUseAction(player.getActiveItem()) == UseAction.BLOCK
-                && item.getMaxUseTime(player.getActiveItem()) - player.getItemUseTimeLeft() < 5;
+                && item.getMaxUseTime(player.getActiveItem(), player) - player.getItemUseTimeLeft() < 5;
     }
 
     @Unique
