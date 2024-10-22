@@ -8,12 +8,12 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.BuiltinModelItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.UseAction;
+import net.minecraft.item.ModelTransformationMode;
+import net.minecraft.item.consume.UseAction;
 import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -64,6 +64,6 @@ public class MixinBuiltinModelItemRenderer {
     private boolean isDisabled() {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
 
-        return player != null && player.getItemCooldownManager().isCoolingDown(Items.SHIELD);
+        return player != null && player.getItemCooldownManager().isCoolingDown(new ItemStack(Items.SHIELD));
     }
 }
