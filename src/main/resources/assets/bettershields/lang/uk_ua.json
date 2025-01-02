@@ -1,0 +1,8 @@
+{
+  "modmenu.descriptionTranslation.bettershields": "Виправляє звуки щита, коли по гравцю, який прикрився щитом, б'є інший гравець",
+  "bettershields.config.soundsEnabled": "Виправення звуків щита",
+  "bettershields.toggleSounds": "Перемикач виправення звуків щита",
+  "bettershields.config.coloredShields": "Кольорові щити",
+  "bettershields.config.disabledColor": "Вимкнути кольори щита",
+  "bettershields.config.risingColor": "Підвищувати кольори щита"
+}
