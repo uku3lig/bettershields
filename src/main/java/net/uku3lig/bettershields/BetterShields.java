@@ -1,10 +1,12 @@
 package net.uku3lig.bettershields;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.uku3lig.bettershields.config.ShieldConfig;
@@ -17,6 +19,9 @@ public class BetterShields implements ModInitializer {
     private static final ConfigManager<ShieldConfig> manager = ConfigManager.createDefault(ShieldConfig.class, "bettershields");
 
     private static final KeyBinding toggle = new KeyBinding("bettershields.toggleSounds", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "BetterShieldSounds");
+
+    @Getter @Setter
+    private static PlayerEntity currentRenderedPlayer = null;
 
     @Override
     public void onInitialize() {

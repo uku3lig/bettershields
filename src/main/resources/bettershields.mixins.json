@@ -7,8 +7,9 @@
     "MixinExplosionImpl"
   ],
   "client": [
-    "MixinShieldModelRenderer",
-    "MixinClientPlayerInteractionManager"
+    "MixinClientPlayerInteractionManager",
+    "MixinPlayerHeldItemFeatureRenderer",
+    "MixinShieldModelRenderer"
   ],
   "injectors": {
     "defaultRequire": 1
