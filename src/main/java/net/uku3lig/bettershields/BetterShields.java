@@ -7,6 +7,10 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.consume.UseAction;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.Vec3d;
 import net.uku3lig.bettershields.config.ShieldConfig;
@@ -20,7 +24,8 @@ public class BetterShields implements ModInitializer {
 
     private static final KeyBinding toggle = new KeyBinding("bettershields.toggleSounds", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "BetterShieldSounds");
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private static PlayerEntity currentRenderedPlayer = null;
 
     @Override
@@ -35,5 +40,23 @@ public class BetterShields implements ModInitializer {
         Vec3d relativePosition = attackerPos.relativize(target.getPos()).normalize();
         Vec3d flat = new Vec3d(relativePosition.x, 0.0, relativePosition.z);
         return flat.dotProduct(rotation) < 0.0;
+    }
+
+    public static int getShieldColorForCurrent() {
+        if (currentRenderedPlayer == null) {
+            return 0xFFFFFF;
+        } else if (currentRenderedPlayer.getItemCooldownManager().isCoolingDown(new ItemStack(Items.SHIELD))) {
+            return manager.getConfig().getDisabledColor();
+        }
+
+        Item item = currentRenderedPlayer.getActiveItem().getItem();
+        if (currentRenderedPlayer.isUsingItem()
+                && !currentRenderedPlayer.getActiveItem().isEmpty()
+                && item.getUseAction(currentRenderedPlayer.getActiveItem()) == UseAction.BLOCK
+                && item.getMaxUseTime(currentRenderedPlayer.getActiveItem(), currentRenderedPlayer) - currentRenderedPlayer.getItemUseTimeLeft() < 5) {
+            return manager.getConfig().getRisingColor();
+        } else {
+            return 0xFFFFFF;
+        }
     }
 }
