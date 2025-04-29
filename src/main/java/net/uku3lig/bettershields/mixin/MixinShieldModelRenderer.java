@@ -8,7 +8,7 @@ import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.item.model.special.ShieldModelRenderer;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.ModelTransformationMode;
+import net.minecraft.item.ItemDisplayContext;
 import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,10 +17,10 @@ import org.spongepowered.asm.mixin.injection.At;
 // part of this code was kindly provided by Marlow's friend, massive thanks to them!
 @Mixin(ShieldModelRenderer.class)
 public class MixinShieldModelRenderer {
-    @WrapOperation(method = "render(Lnet/minecraft/component/ComponentMap;Lnet/minecraft/item/ModelTransformationMode;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IIZ)V",
+    @WrapOperation(method = "render(Lnet/minecraft/component/ComponentMap;Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IIZ)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;II)V"))
-    public void changeShieldColor(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, Operation<Void> original, @Local(argsOnly = true) ModelTransformationMode mode) {
-        if (mode.isFirstPerson() || mode == ModelTransformationMode.GUI) {
+    public void changeShieldColor(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, Operation<Void> original, @Local(argsOnly = true) ItemDisplayContext mode) {
+        if (mode.isFirstPerson() || mode == ItemDisplayContext.GUI) {
             BetterShields.setCurrentRenderedPlayer(MinecraftClient.getInstance().player);
         }
 

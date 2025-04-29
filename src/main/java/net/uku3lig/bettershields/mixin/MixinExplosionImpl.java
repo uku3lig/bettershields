@@ -35,7 +35,7 @@ public abstract class MixinExplosionImpl implements Explosion {
             if (nearEntity.isAlive()) {
                 double distance = Math.sqrt(nearEntity.squaredDistanceTo(this.getPosition()));
                 if (distance < maxDistance && BetterShields.doesShieldBlock(this.getPosition(), nearEntity)) {
-                    this.getWorld().playSound(nearEntity.getX(), nearEntity.getY(), nearEntity.getZ(), SoundEvents.ITEM_SHIELD_BLOCK, nearEntity.getSoundCategory(), 1.0F, 0.8F + this.getWorld().random.nextFloat() * 0.4F, false);
+                    this.getWorld().playSound(nearEntity, nearEntity.getX(), nearEntity.getY(), nearEntity.getZ(), SoundEvents.ITEM_SHIELD_BLOCK.value(), nearEntity.getSoundCategory(), 1.0F, 0.8F + this.getWorld().random.nextFloat() * 0.4F);
                 }
             }
         }
