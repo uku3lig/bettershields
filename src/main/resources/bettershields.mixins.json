@@ -9,6 +9,7 @@
   "client": [
     "MixinBannerBlockEntityRenderer",
     "MixinClientPlayerInteractionManager",
+    "MixinHeldItemRenderer",
     "MixinPlayerHeldItemFeatureRenderer",
     "MixinShieldModelRenderer"
   ],
