@@ -8,6 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.bettershields.config.ShieldConfig;
@@ -27,6 +29,9 @@ public class MixinClientPlayerInteractionManager {
         if (config.isSoundsEnabled() && target instanceof LivingEntity entity && BetterShields.doesShieldBlock(player.getPos(), entity) && world != null) {
             if (player.getMainHandStack().getItem() instanceof AxeItem) {
                 world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BREAK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
+                if (target instanceof PlayerEntity otherPlayer) {
+                    otherPlayer.getItemCooldownManager().set(new ItemStack(Items.SHIELD), 100);
+                }
             } else {
                 world.playSound(entity.getX(), entity.getY(), entity.getZ(), SoundEvents.ITEM_SHIELD_BLOCK, entity.getSoundCategory(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F, false);
             }
