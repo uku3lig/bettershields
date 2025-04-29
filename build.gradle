@@ -1,6 +1,6 @@
 plugins {
-    id "fabric-loom" version "1.9-SNAPSHOT"
-    id "io.freefair.lombok" version "8.11"
+    id "fabric-loom" version "1.10-SNAPSHOT"
+    id "io.freefair.lombok" version "8.13.1"
 }
 
 version = "${project.mod_version}+mc${project.minecraft_version}"
@@ -8,7 +8,7 @@ group = project.maven_group
 
 repositories {
     maven {
-        url "https://maven.uku3lig.net/releases"
+        url = "https://maven.uku3lig.net/releases"
     }
 }
 
@@ -23,7 +23,7 @@ dependencies {
 
 processResources {
     inputs.property "version", project.version
-    filteringCharset "UTF-8"
+    filteringCharset = "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version
