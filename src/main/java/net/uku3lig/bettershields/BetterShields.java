@@ -44,7 +44,7 @@ public class BetterShields implements ModInitializer {
 
     public static int getShieldColorForCurrent() {
         if (currentRenderedPlayer == null) {
-            return 0xFFFFFF;
+            return 0xFFFFFFFF;
         } else if (currentRenderedPlayer.getItemCooldownManager().isCoolingDown(new ItemStack(Items.SHIELD))) {
             return manager.getConfig().getDisabledColor();
         }
@@ -56,7 +56,7 @@ public class BetterShields implements ModInitializer {
                 && item.getMaxUseTime(currentRenderedPlayer.getActiveItem(), currentRenderedPlayer) - currentRenderedPlayer.getItemUseTimeLeft() < 5) {
             return manager.getConfig().getRisingColor();
         } else {
-            return 0xFFFFFF;
+            return 0xFFFFFFFF;
         }
     }
 }
