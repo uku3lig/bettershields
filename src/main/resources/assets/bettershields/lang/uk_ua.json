@@ -1,7 +1,7 @@
 {
   "modmenu.descriptionTranslation.bettershields": "Виправляє звуки щита, коли по гравцю, який прикрився щитом, б'є інший гравець",
   "bettershields.config.soundsEnabled": "Виправення звуків щита",
-  "bettershields.toggleSounds": "Перемикач виправення звуків щита",
+  "bettershields.toggleSounds": "Перемкнути виправення звуків щита",
   "bettershields.config.coloredShields": "Кольорові щити",
   "bettershields.config.disabledColor": "Вимкнути кольори щита",
   "bettershields.config.risingColor": "Підвищувати кольори щита",
@@ -9,5 +9,5 @@
   "bettershields.rising.normal": "Усталено",
   "bettershields.rising.skip": "Пропустити",
   "bettershields.rising.waitDelay": "Затримка",
-  "bettershields.rising.help": "- Усталено: усталена анімація\n- Пропустити: немає анімації, щит піднімається, щойно ви натискаєте\n- Затримка підйому: немає анімації, щит буде піднято, коли він фактично захистить гравця"
+  "bettershields.rising.help": "— Усталено: усталена анімація.\n— Пропустити: немає анімації, щит піднімається, щойно ви натискаєте.\n— Затримка: немає анімації, щит буде піднято, коли він фактично захистить гравця."
 }
