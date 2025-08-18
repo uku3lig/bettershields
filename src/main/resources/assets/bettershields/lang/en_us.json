@@ -4,5 +4,6 @@
   "bettershields.config.coloredShields": "Colored Shields",
   "bettershields.config.disabledColor": "Disabled Shield Color",
   "bettershields.config.risingColor": "Rising Shield Color",
-  "bettershields.config.risingAnimation": "Shield Rising Animation"
+  "bettershields.config.risingAnimation": "Shield Rising Animation",
+  "bettershields.config.colorOtherPlayers": "Color Other Players"
 }

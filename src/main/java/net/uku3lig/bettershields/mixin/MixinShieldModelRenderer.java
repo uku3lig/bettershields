@@ -20,12 +20,14 @@ public class MixinShieldModelRenderer {
     @WrapOperation(method = "render(Lnet/minecraft/component/ComponentMap;Lnet/minecraft/item/ItemDisplayContext;Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IIZ)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;II)V"))
     public void changeShieldColor(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, Operation<Void> original, @Local(argsOnly = true) ItemDisplayContext mode) {
-        if (mode.isFirstPerson() || mode == ItemDisplayContext.GUI) {
+        boolean isPlayerSelf = mode.isFirstPerson() || mode == ItemDisplayContext.GUI;
+        if (isPlayerSelf) {
             BetterShields.setCurrentRenderedPlayer(MinecraftClient.getInstance().player);
         }
 
         ShieldConfig config = BetterShields.getManager().getConfig();
-        if (config.isColoredShields()) {
+        // only color other player's shield if that's set to true
+        if (config.isColoredShields() && (isPlayerSelf || config.isColorOtherPlayers())) {
             instance.render(matrices, vertices, light, overlay, BetterShields.getShieldColorForCurrent());
         } else {
             original.call(instance, matrices, vertices, light, overlay);

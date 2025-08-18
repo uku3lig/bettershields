@@ -17,4 +17,5 @@ public class ShieldConfig implements Serializable {
     private int disabledColor = 0xFF0000;
     private int risingColor = 0xFFCC00;
     private boolean risingAnimation = true;
+    private boolean colorOtherPlayers = true;
 }

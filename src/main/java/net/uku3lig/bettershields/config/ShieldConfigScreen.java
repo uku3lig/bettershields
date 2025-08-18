@@ -20,6 +20,7 @@ public class ShieldConfigScreen extends AbstractConfigScreen<ShieldConfig> {
                 new ColorOption("bettershields.config.disabledColor", config.getDisabledColor(), config::setDisabledColor),
                 new ColorOption("bettershields.config.risingColor", config.getRisingColor(), config::setRisingColor),
                 CyclingOption.ofBoolean("bettershields.config.risingAnimation", config.isRisingAnimation(), config::setRisingAnimation),
+                CyclingOption.ofBoolean("bettershields.config.colorOtherPlayers", config.isColorOtherPlayers(), config::setColorOtherPlayers),
         };
     }
 }

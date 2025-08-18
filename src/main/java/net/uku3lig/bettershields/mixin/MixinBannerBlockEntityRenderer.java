@@ -3,6 +3,7 @@ package net.uku3lig.bettershields.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.block.entity.BannerBlockEntityRenderer;
@@ -18,7 +19,9 @@ public class MixinBannerBlockEntityRenderer {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;II)V"))
     private static void changePlateColor(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, Operation<Void> original, @Local(argsOnly = true, ordinal = 0) boolean isBanner) {
         ShieldConfig config = BetterShields.getManager().getConfig();
-        if (!isBanner && config.isColoredShields()) {
+        boolean isPlayerSelf = BetterShields.getCurrentRenderedPlayer().getUuid().equals(MinecraftClient.getInstance().player.getUuid());
+
+        if (!isBanner && config.isColoredShields() && (isPlayerSelf || config.isColorOtherPlayers())) {
             instance.render(matrices, vertices, light, overlay, BetterShields.getShieldColorForCurrent());
         } else {
             original.call(instance, matrices, vertices, light, overlay);
