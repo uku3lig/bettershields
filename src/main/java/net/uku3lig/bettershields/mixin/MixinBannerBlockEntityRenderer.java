@@ -18,13 +18,16 @@ public class MixinBannerBlockEntityRenderer {
     @WrapOperation(method = "renderCanvas(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/model/ModelPart;Lnet/minecraft/client/util/SpriteIdentifier;ZLnet/minecraft/util/DyeColor;Lnet/minecraft/component/type/BannerPatternsComponent;ZZ)V",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/model/ModelPart;render(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;II)V"))
     private static void changePlateColor(ModelPart instance, MatrixStack matrices, VertexConsumer vertices, int light, int overlay, Operation<Void> original, @Local(argsOnly = true, ordinal = 0) boolean isBanner) {
-        ShieldConfig config = BetterShields.getManager().getConfig();
-        boolean isPlayerSelf = BetterShields.getCurrentRenderedPlayer().getUuid().equals(MinecraftClient.getInstance().player.getUuid());
+        if (!isBanner) {
+            ShieldConfig config = BetterShields.getManager().getConfig();
+            boolean isPlayerSelf = BetterShields.getCurrentRenderedPlayer().getUuid().equals(MinecraftClient.getInstance().player.getUuid());
 
-        if (!isBanner && config.isColoredShields() && (isPlayerSelf || config.isColorOtherPlayers())) {
-            instance.render(matrices, vertices, light, overlay, BetterShields.getShieldColorForCurrent());
-        } else {
-            original.call(instance, matrices, vertices, light, overlay);
+            if (config.isColoredShields() && (isPlayerSelf || config.isColorOtherPlayers())) {
+                instance.render(matrices, vertices, light, overlay, BetterShields.getShieldColorForCurrent());
+                return;
+            }
         }
+
+        original.call(instance, matrices, vertices, light, overlay);
     }
 }
