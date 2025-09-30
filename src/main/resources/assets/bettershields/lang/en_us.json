@@ -1,4 +1,5 @@
 {
+  "key.category.bettershields.key": "BetterShields",
   "bettershields.toggleSounds": "Toggle Shield Sound Fix",
   "bettershields.config.soundsEnabled": "Shield Sound Fix",
   "bettershields.config.coloredShields": "Colored Shields",

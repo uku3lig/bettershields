@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.consume.UseAction;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.uku3lig.bettershields.config.ShieldConfig;
 import net.uku3lig.ukulib.config.ConfigManager;
@@ -22,7 +23,7 @@ public class BetterShields implements ModInitializer {
     @Getter
     private static final ConfigManager<ShieldConfig> manager = ConfigManager.createDefault(ShieldConfig.class, "bettershields");
 
-    private static final KeyBinding toggle = new KeyBinding("bettershields.toggleSounds", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, "BetterShieldSounds");
+    private static final KeyBinding toggle = new KeyBinding("bettershields.toggleSounds", InputUtil.Type.KEYSYM, GLFW.GLFW_KEY_UNKNOWN, KeyBinding.Category.create(Identifier.of("bettershields", "key")));
 
     @Getter
     @Setter
@@ -37,7 +38,7 @@ public class BetterShields implements ModInitializer {
         if (!target.isBlocking()) return false;
 
         Vec3d rotation = target.getRotationVec(1);
-        Vec3d relativePosition = attackerPos.relativize(target.getPos()).normalize();
+        Vec3d relativePosition = attackerPos.relativize(target.getEntityPos()).normalize();
         Vec3d flat = new Vec3d(relativePosition.x, 0.0, relativePosition.z);
         return flat.dotProduct(rotation) < 0.0;
     }

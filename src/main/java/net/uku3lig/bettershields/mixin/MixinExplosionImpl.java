@@ -23,7 +23,7 @@ public abstract class MixinExplosionImpl implements Explosion {
         if (!BetterShields.getManager().getConfig().isSoundsEnabled()) return;
 
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
-        if (!this.getWorld().isClient || player == null) return;
+        if (!this.getWorld().isClient() || player == null) return;
 
         double maxDistance = this.getPower() * 2;
         double diameter = (maxDistance + 1.0) * 2;
