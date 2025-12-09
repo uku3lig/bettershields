@@ -1,6 +1,6 @@
 package net.uku3lig.bettershields.config;
 
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screens.Screen;
 import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.ukulib.config.option.ColorOption;
 import net.uku3lig.ukulib.config.option.CyclingOption;

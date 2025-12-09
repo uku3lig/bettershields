@@ -4,14 +4,14 @@
   "package": "net.uku3lig.bettershields.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MixinExplosionImpl"
+    "MixinServerExplosion"
   ],
   "client": [
-    "MixinBannerBlockEntityRenderer",
-    "MixinClientPlayerInteractionManager",
-    "MixinHeldItemRenderer",
-    "MixinPlayerHeldItemFeatureRenderer",
-    "MixinShieldModelRenderer"
+    "MixinBannerRenderer",
+    "MixinMultiplayerGameMode",
+    "MixinItemInHandRenderer",
+    "MixinPlayerItemInHandLayer",
+    "MixinShieldSpecialRenderer"
   ],
   "injectors": {
     "defaultRequire": 1
