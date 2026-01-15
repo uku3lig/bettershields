@@ -2,6 +2,7 @@ package net.uku3lig.bettershields.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.renderer.ItemInHandRenderer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.uku3lig.bettershields.BetterShields;
@@ -15,8 +16,12 @@ public class MixinItemInHandRenderer {
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;applyItemArmTransform(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/HumanoidArm;F)V"),
             index = 2)
     public float modifyEquipProgress(float original, @Local(argsOnly = true) ItemStack item) {
-        if (item.is(Items.SHIELD) && !BetterShields.getManager().getConfig().isRisingAnimation()) {
-            return 0;
+        if (item.is(Items.SHIELD)) {
+            return switch (BetterShields.getManager().getConfig().getRisingAnimation()) {
+                case NORMAL -> original;
+                case SKIP -> 0.0F;
+                case WAIT_DELAY -> Mth.ceil(original);
+            };
         } else {
             return original;
         }

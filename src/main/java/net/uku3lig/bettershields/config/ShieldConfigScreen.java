@@ -1,6 +1,8 @@
 package net.uku3lig.bettershields.config;
 
+import net.minecraft.client.OptionInstance;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.uku3lig.bettershields.BetterShields;
 import net.uku3lig.ukulib.config.option.ColorOption;
 import net.uku3lig.ukulib.config.option.CyclingOption;
@@ -19,7 +21,8 @@ public class ShieldConfigScreen extends AbstractConfigScreen<ShieldConfig> {
                 CyclingOption.ofBoolean("bettershields.config.coloredShields", config.isColoredShields(), config::setColoredShields),
                 new ColorOption("bettershields.config.disabledColor", config.getDisabledColor(), config::setDisabledColor),
                 new ColorOption("bettershields.config.risingColor", config.getRisingColor(), config::setRisingColor),
-                CyclingOption.ofBoolean("bettershields.config.risingAnimation", config.isRisingAnimation(), config::setRisingAnimation),
+                CyclingOption.ofTranslatableEnum("bettershields.config.risingAnimation", ShieldConfig.RisingAnimation.class, config.getRisingAnimation(), config::setRisingAnimation,
+                        OptionInstance.cachedConstantTooltip(Component.translatable("bettershields.rising.help"))),
                 CyclingOption.ofBoolean("bettershields.config.colorOtherPlayers", config.isColorOtherPlayers(), config::setColorOtherPlayers),
         };
     }

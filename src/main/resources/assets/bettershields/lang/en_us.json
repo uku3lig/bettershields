@@ -6,5 +6,9 @@
   "bettershields.config.disabledColor": "Disabled Shield Color",
   "bettershields.config.risingColor": "Rising Shield Color",
   "bettershields.config.risingAnimation": "Shield Rising Animation",
-  "bettershields.config.colorOtherPlayers": "Color Other Players"
+  "bettershields.config.colorOtherPlayers": "Color Other Players",
+  "bettershields.rising.normal": "Normal",
+  "bettershields.rising.skip": "Skip",
+  "bettershields.rising.waitDelay": "Wait Rising Delay",
+  "bettershields.rising.help": "- Normal: vanilla animation\n- Skip: no animation, the shield is up as soon as you click\n- Wait Rising Delay: no animation, the shield will be up once it actually protects the player"
 }
