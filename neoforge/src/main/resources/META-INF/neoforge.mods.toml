@@ -1,0 +1,36 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+[[mods]]
+modId = "bettershields"
+displayName = "BetterShields"
+version = "${version}"
+
+logoFile = "assets/bettershields/icon.png"
+authors = "uku"
+description = "client side qol features for shields"
+
+[[dependencies.bettershields]]
+modId = "minecraft"
+type = "required"
+versionRange = "[26.1,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.bettershields]]
+modId = "neoforge"
+type = "required"
+versionRange = "[26.1.0.0,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.bettershields]]
+modId = "ukulib"
+type = "required"
+versionRange = "[2.0.0,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[mixins]]
+config = "bettershields.mixins.json"

@@ -8,14 +8,14 @@
     "uku"
   ],
   "contact": {
-    "repo": "https://github.com/uku3lig/bettershieldsounds"
+    "repo": "https://github.com/uku3lig/bettershields"
   },
   "license": "MPL-2.0",
   "icon": "assets/bettershields/icon.png",
   "environment": "client",
   "entrypoints": {
-    "main": [
-      "net.uku3lig.bettershields.BetterShields"
+    "client": [
+      "net.uku3lig.bettershields.fabric.BetterShieldsFabric"
     ],
     "ukulib": [
       "net.uku3lig.bettershields.UkulibHook"

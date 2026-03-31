@@ -3,7 +3,6 @@ package net.uku3lig.bettershields;
 import com.mojang.blaze3d.platform.InputConstants;
 import lombok.Getter;
 import lombok.Setter;
-import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -20,7 +19,7 @@ import net.uku3lig.ukulib.config.ConfigManager;
 import net.uku3lig.ukulib.utils.Ukutils;
 import org.lwjgl.glfw.GLFW;
 
-public class BetterShields implements ModInitializer {
+public class BetterShields {
     @Getter
     private static final ConfigManager<ShieldConfig> manager = ConfigManager.createDefault(ShieldConfig.class, "bettershields");
 
@@ -30,8 +29,7 @@ public class BetterShields implements ModInitializer {
     @Setter
     private static Avatar currentRenderedAvatar = null;
 
-    @Override
-    public void onInitialize() {
+    public static void onInitialize() {
         Ukutils.registerToggleBind(toggle, () -> manager.getConfig().isSoundsEnabled(), b -> manager.getConfig().setSoundsEnabled(b), Component.literal("Shield Sounds "));
     }
 
