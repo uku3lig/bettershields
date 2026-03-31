@@ -7,6 +7,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -27,7 +28,7 @@ public class BetterShields implements ModInitializer {
 
     @Getter
     @Setter
-    private static Player currentRenderedPlayer = null;
+    private static Avatar currentRenderedAvatar = null;
 
     @Override
     public void onInitialize() {
@@ -44,17 +45,17 @@ public class BetterShields implements ModInitializer {
     }
 
     public static int getShieldColorForCurrent() {
-        if (currentRenderedPlayer == null) {
+        if (!(currentRenderedAvatar instanceof Player player)) {
             return 0xFFFFFFFF;
-        } else if (currentRenderedPlayer.getCooldowns().isOnCooldown(new ItemStack(Items.SHIELD))) {
+        } else if (player.getCooldowns().isOnCooldown(new ItemStack(Items.SHIELD))) {
             return manager.getConfig().getDisabledColor();
         }
 
-        Item item = currentRenderedPlayer.getUseItem().getItem();
-        if (currentRenderedPlayer.isUsingItem()
-                && !currentRenderedPlayer.getUseItem().isEmpty()
-                && item.getUseAnimation(currentRenderedPlayer.getUseItem()) == ItemUseAnimation.BLOCK
-                && item.getUseDuration(currentRenderedPlayer.getUseItem(), currentRenderedPlayer) - currentRenderedPlayer.getUseItemRemainingTicks() < 5) {
+        Item item = currentRenderedAvatar.getUseItem().getItem();
+        if (currentRenderedAvatar.isUsingItem()
+                && !currentRenderedAvatar.getUseItem().isEmpty()
+                && item.getUseAnimation(currentRenderedAvatar.getUseItem()) == ItemUseAnimation.BLOCK
+                && item.getUseDuration(currentRenderedAvatar.getUseItem(), currentRenderedAvatar) - currentRenderedAvatar.getUseItemRemainingTicks() < 5) {
             return manager.getConfig().getRisingColor();
         } else {
             return 0xFFFFFFFF;

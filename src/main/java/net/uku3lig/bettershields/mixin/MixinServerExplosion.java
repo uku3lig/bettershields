@@ -28,13 +28,13 @@ public abstract class MixinServerExplosion implements Explosion {
         double diameter = (maxDistance + 1.0) * 2;
         AABB box = AABB.ofSize(this.center(), diameter, diameter, diameter);
 
-        List<LivingEntity> nearEntities = this.level().getEntitiesOfClass(LivingEntity.class, box, obj -> true);
+        List<LivingEntity> nearEntities = this.level().getEntitiesOfClass(LivingEntity.class, box, _ -> true);
 
         for (LivingEntity nearEntity : nearEntities) {
             if (nearEntity.isAlive()) {
                 double distance = Math.sqrt(nearEntity.distanceToSqr(this.center()));
                 if (distance < maxDistance && BetterShields.doesShieldBlock(this.center(), nearEntity)) {
-                    this.level().playSound(nearEntity, nearEntity.getX(), nearEntity.getY(), nearEntity.getZ(), SoundEvents.SHIELD_BLOCK.value(), nearEntity.getSoundSource(), 1.0F, 0.8F + this.level().random.nextFloat() * 0.4F);
+                    this.level().playSound(nearEntity, nearEntity.getX(), nearEntity.getY(), nearEntity.getZ(), SoundEvents.SHIELD_BLOCK.value(), nearEntity.getSoundSource(), 1.0F, 0.8F + this.level().getRandom().nextFloat() * 0.4F);
                 }
             }
         }

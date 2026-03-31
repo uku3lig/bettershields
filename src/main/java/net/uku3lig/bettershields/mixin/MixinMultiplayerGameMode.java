@@ -26,12 +26,12 @@ public class MixinMultiplayerGameMode {
 
         if (config.isSoundsEnabled() && target instanceof LivingEntity entity && BetterShields.doesShieldBlock(player.position(), entity) && world != null) {
             if (player.getMainHandItem().getItem() instanceof AxeItem) {
-                world.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.SHIELD_BREAK.value(), entity.getSoundSource(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+                world.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.SHIELD_BREAK.value(), entity.getSoundSource(), 1.0F, 0.8F + world.getRandom().nextFloat() * 0.4F);
                 if (target instanceof Player otherPlayer) {
                     otherPlayer.getCooldowns().addCooldown(new ItemStack(Items.SHIELD), 100);
                 }
             } else {
-                world.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.SHIELD_BLOCK.value(), entity.getSoundSource(), 1.0F, 0.8F + world.random.nextFloat() * 0.4F);
+                world.playSound(entity, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.SHIELD_BLOCK.value(), entity.getSoundSource(), 1.0F, 0.8F + world.getRandom().nextFloat() * 0.4F);
             }
         }
     }
