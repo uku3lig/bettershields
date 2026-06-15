@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(ItemInHandRenderer.class)
 public class MixinItemInHandRenderer {
-    @ModifyArg(method = "renderArmWithItem",
+    @ModifyArg(method = "submitArmWithItem",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;applyItemArmTransform(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/HumanoidArm;F)V"),
             index = 2)
     public float modifyEquipProgress(float original, @Local(argsOnly = true) ItemStack itemStack) {
