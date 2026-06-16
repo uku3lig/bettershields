@@ -14,21 +14,21 @@ description = "client side qol features for shields"
 [[dependencies.bettershields]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.1,)"
+versionRange = "[26.2,)"
 ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.bettershields]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1.0.0,)"
+versionRange = "[26.2.0.0-beta,)"
 ordering = "NONE"
 side = "CLIENT"
 
 [[dependencies.bettershields]]
 modId = "ukulib"
 type = "required"
-versionRange = "[2.0.0,)"
+versionRange = "[2.1.0,3)"
 ordering = "NONE"
 side = "CLIENT"
 
