@@ -8,7 +8,10 @@ displayName = "BetterShields"
 version = "${version}"
 
 logoFile = "assets/bettershields/icon.png"
-authors = "uku"
+authors = """
+uku
+ItsRecovery (Russian translation)
+"""
 description = "client side qol features for shields"
 
 [[dependencies.bettershields]]

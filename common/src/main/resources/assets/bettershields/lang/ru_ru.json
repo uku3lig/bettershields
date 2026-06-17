@@ -1,0 +1,17 @@
+{
+  "key.category.bettershields.key": "BetterShields",
+  "bettershields.toggleSounds": "Переключить исправление звука щита",
+  "bettershields.config.soundsEnabled": "Исправление звука",
+  "bettershields.config.coloredShields": "Цветные щиты",
+  "bettershields.config.disabledColor": "Цвет отключенного щита",
+  "bettershields.config.risingColor": "Цвет поднятого щита",
+  "bettershields.config.risingAnimation": "Анимация поднятия щита",
+  "bettershields.config.colorOtherPlayers": "Цветные щиты у других игроков",
+  "bettershields.rising.normal": "Обычная",
+  "bettershields.rising.skip": "Без анимации",
+  "bettershields.rising.waitDelay": "С задержкой",
+  "bettershields.rising.help": "- С задержкой: без анимации, но щит поднимется, как только он начнёт защищать игрока",
+  
+  "modmenu.summaryTranslation.bettershields": "Клиентские улучшения для щитов",
+  "modmenu.descriptionTranslation.bettershields": "Клиентские улучшения для щитов"
+}

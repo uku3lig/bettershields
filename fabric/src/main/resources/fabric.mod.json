@@ -5,7 +5,8 @@
   "name": "BetterShields",
   "description": "client side qol features for shields",
   "authors": [
-    "uku"
+    "uku",
+    "ItsRecovery (Russian translation)"
   ],
   "contact": {
     "repo": "https://github.com/uku3lig/bettershields"
